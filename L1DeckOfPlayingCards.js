@@ -2,58 +2,60 @@ class Card {
     constructor(suit, value) {
         this.value = value;
         this.suit = suit;
-
+        
         switch(this.value) {
             case 1: this.value = 'Ace' ; break;
             case 11: this.value = 'Jack' ; break;
             case 12: this.value = 'Queen' ; break;
             case 13: this.value = 'King' ; break;
-        };
-    };
+        }
+    }
     toString() {
         return `\'Card { ${this.value} of ${this.suit} }\'`
-    };
-};
+    }
+}
 
 
 class Deck {
     constructor() {
         let suits = ['Spades', 'Diamonds', 'Hearts', 'Clubs'];
-        let cards = [];
+        let cardArr = [];
         for (let i in suits) {
             for (let j = 1; j <= 13; j++) {
-                cards.push(new Card(suits[i], j));
+                cardArr.push(new Card(suits[i], j));
             }
         }
-        this.Deck = cards;
+        this.cards = cardArr;
+    }
+
+    shuffle() {
+        let remainingCards = [...this.cards];
+        let shuffledCards = [];
+        for (let i = remainingCards.length-1; i >= 0; i--) {
+            let random = Math.floor(Math.random() * (i + 1));
+            shuffledCards.push(remainingCards[random]);
+            remainingCards.splice(random,1);
+        };
+        this.cards = shuffledCards;
+        return this;
+    }
+
+    draw() {
+        this.cards.pop()
+        return this
+    }
+
+    reset() {
+        this.cards = new Deck;
+        return this
     }
 };
 
-// const deck = {
-//     cards: new Deck,
-//     shuffle: function() {
-//         let remainingCards = [...this.cards];
-//         shuffledCards = [];
-//         for (let i = remainingCards.length-1; i >= 0; i--) {
-//             let random = Math.floor(Math.random() * (i + 1));
-//             shuffledCards.push(remainingCards[random]);
-//             remainingCards.splice(random,1);
-//         };
-//         return this.cards = shuffledCards;
-//     },
-//     draw: function() {
-//         this.cards.shift()
-//     },
-//     reset: function() {
-//         this.cards = cards()        
-//     }
-// }
-
-
 
 let myDeck = new Deck;
-
-console.log(myDeck)
+myDeck.draw().draw().draw()
+// console.log(myDeck.cards[0].toString())
+console.log(myDeck);
 
 
 

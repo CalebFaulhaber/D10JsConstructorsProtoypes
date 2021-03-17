@@ -3,26 +3,35 @@ class Vector {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+    magnitude() {
+        return Math.sqrt(this.x * this.x + this.y * this.y)
+    }
+    plus(v) {
+        return new Vector(this.x += v.x, this.y += v.y, this.z += v.y);
     } 
+    minus(v) {
+        return new Vector(this.x -= v.x, this.y -= v.y, this.z += v.z);
+    }
 }; 
 
-Vector.prototype.Magnitude = function() {
-    return Math.sqrt(this.x * this.x + this.y * this.y);
-}
-Vector.prototype.Plus = function(v) {
-        return new Vector(this.x += v.x, this.y += v.y, this.z += v.y);
-}
-Vector.prototype.Minus = function(v) {
-    return new Vector(this.x -= v.x, this.y -= v.y, this.z += v.z);
-}
+// Vector.prototype.Magnitude = function() {
+//     return Math.sqrt(this.x * this.x + this.y * this.y);
+// }
+// Vector.prototype.Plus = function(v) {
+//         return new Vector(this.x += v.x, this.y += v.y, this.z += v.y);
+// }
+// Vector.prototype.Minus = function(v) {
+//     return new Vector(this.x -= v.x, this.y -= v.y, this.z += v.z);
+// }
 
 let v1 = new Vector(4,4,0);
 let v2 = new Vector(1,2,2);
 
 console.log(v1)
-console.log(v2.Plus(v2))
-console.log(v2.Minus(v1))
-console.log(v1.Magnitude())
+console.log(v2.plus(v2))
+console.log(v2.minus(v1))
+console.log(v1.magnitude())
 
 
 
